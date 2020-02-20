@@ -80,13 +80,22 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     PrintLine(TEXT("Trying guessing again, you have %i lives left"), Lives);
 }
 
-bool UBullCowCartridge::IsIsogram(FString Letter) const
+bool UBullCowCartridge::IsIsogram(FString Word) const
 {
- 
-    for (auto i = 0; i < Letter[5]; i++)
+    int32 Index = 0;
+
+    for (int32 Comparison = Index + 1; Comparison < Word.Len(); Comparison++)
+    {
+      if(Word[Index] == Word[Comparison])
+      {
+          PrintLine(TEXT("The two chracters are the same!"));
+      }
+    }
+
+    for (auto Index = 0; Index < Word.Len(); Index++)
     { 
-        const TCHAR Letter[] = TEXT("cakes");
-        PrintLine(TEXT("Character 1 of the hidden word is : % c"), Letter[i]);
+        PrintLine(TEXT("Character of the hidden word is : % c"), HiddenWord[Index]);
+        PrintLine(TEXT("Character of the input is : % c"), Word[Index]);
     } 
        
 

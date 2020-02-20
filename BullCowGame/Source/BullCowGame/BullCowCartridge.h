@@ -24,5 +24,5 @@ class BULLCOWGAME_API UBullCowCartridge : public UCartridge
 		int32 Lives; 
 		bool bGameOver;
 		
-		bool IsIsogram(FString Letter) const;
+		bool IsIsogram(FString Word) const;
 };
