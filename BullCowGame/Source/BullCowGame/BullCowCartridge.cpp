@@ -18,6 +18,9 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
     ClearScreen(); // Clear up terminal
+
+    HiddenWord.Len();
+
     PrintLine(Input); // Print out Input
 
     // Check Guess
@@ -26,12 +29,9 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
                 // Error Message
                     // Try Again
             // Yes
-                // Isogram == HiddenWord
-                    // No
-                        // Remove a life
-                    // Yes
-                        // Win
-
+             
+                  
+                   
 
         // IsLowercase
              // No
@@ -43,15 +43,6 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
                         // Remove a life
                     // Yes
 
-        // Wrong_Length
-             // No
-                // Error Message
-                    // Try Again
-            // Yes
-                // Isogram.length() == HiddenWord.length()
-                    // No
-                        // Remove a life
-                    // Yes
 
     // Check if Lives > 0
            // Yes 
@@ -64,12 +55,14 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     // Check if Input == HiddenWord
     if (Input == HiddenWord) // Is guess Correct?
     {
-        // Print Win Message
         PrintLine(TEXT("You Won!"));
     }
     else
     {
-        // Print Lose Message
+        if (Input.Len() != HiddenWord.Len())
+        {
+            PrintLine(TEXT("The HiddenWord is 4 characters long. Please try again!"));
+        }
         PrintLine(TEXT("You Lost!"));
     }
 
