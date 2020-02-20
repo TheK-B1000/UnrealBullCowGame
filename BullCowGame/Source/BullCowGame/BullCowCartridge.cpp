@@ -10,10 +10,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     PrintLine(TEXT("Can you guess the 3 letter word?"));
     PrintLine(TEXT("Press Enter to Continue...")); 
 
-    // Setting up game
-    HiddenWord = "ape";  // Set HiddenWord
-
-    // Set Lives
+    SetupGame(); // Setting up game
 
     // Prompt to check guess
 }
@@ -73,8 +70,14 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     else
     {
         // Print Lose Message
-        PrintLine(TEXT("You Loset!"));
+        PrintLine(TEXT("You Lost!"));
     }
 
 
+}
+
+void UBullCowCartridge::SetupGame()
+{
+    HiddenWord = "ape";  
+    Lives = 4;
 }
