@@ -86,18 +86,13 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
 
     for (int32 Comparison = Index + 1; Comparison < Word.Len(); Comparison++)
     {
-      if(Word[Index] == Word[Comparison])
-      {
-          PrintLine(TEXT("The two chracters are the same!"));
-      }
+        for (auto Index = 0; Index < Word.Len(); Index++)
+        {
+            if (Word[Index] == Word[Comparison])
+            {
+                return false;
+            }
+        }
     }
-
-    for (auto Index = 0; Index < Word.Len(); Index++)
-    { 
-        PrintLine(TEXT("Character of the hidden word is : % c"), HiddenWord[Index]);
-        PrintLine(TEXT("Character of the input is : % c"), Word[Index]);
-    } 
-       
-
     return true;
 }
