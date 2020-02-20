@@ -5,14 +5,14 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
 
-    // Introduction 
-    PrintLine(TEXT("Welcome to Bull Cow Game!"));
-    PrintLine(TEXT("Can you guess the 3 letter word?"));
-    PrintLine(TEXT("Press Enter to Continue...")); 
-
     SetupGame(); // Setting up game
 
-    // Prompt to check guess
+    PrintLine(TEXT("The HiddenWord is: %s. \nIt is %i charactes long."), *HiddenWord, HiddenWord.Len()); // Debug line
+
+    // Introduction 
+    PrintLine(TEXT("Welcome to Bull Cow Game!"));
+    PrintLine(TEXT("Can you guess the %i letter word?"), HiddenWord.Len());
+    PrintLine(TEXT("Enter your guess!")); 
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -61,7 +61,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     {
         if (Input.Len() != HiddenWord.Len())
         {
-            PrintLine(TEXT("The HiddenWord is 4 characters long. Please try again!"));
+            PrintLine(TEXT("The HiddenWord is %i characters long. \nPlease try again!"), HiddenWord.Len());
         }
         PrintLine(TEXT("You Lost!"));
     }
