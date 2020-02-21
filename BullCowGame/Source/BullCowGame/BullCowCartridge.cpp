@@ -5,9 +5,7 @@
 void UBullCowCartridge::BeginPlay() 
 {
     Super::BeginPlay();
-
     auto Isograms = GetValidWords(Words);
-
     SetupGame();
 }
 
@@ -48,6 +46,7 @@ void UBullCowCartridge::EndGame()
 
 void UBullCowCartridge::ProcessGuess(const FString& Guess)
 {
+
     if (Guess == HiddenWord) // Is guess Correct?
     {
         PrintLine(TEXT("You Won!"));
@@ -79,6 +78,10 @@ void UBullCowCartridge::ProcessGuess(const FString& Guess)
           EndGame();
           return;
       }
+
+   FBullCowCount Score = GetBullCows(Guess);
+
+    PrintLine(TEXT("You have %i Bulls and %i Cows"), Score.Bulls, Score.Cows);
     PrintLine(TEXT("Trying guessing again, you have %i lives left"), Lives);
 }
 
@@ -110,4 +113,28 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
         }
     }
     return true;
+}
+
+FBullCowCount UBullCowCartridge::GetBullCows(const FString& Guess) const
+{
+    FBullCowCount Count;
+
+    for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); GuessIndex++)
+    {
+        if (Guess[GuessIndex] == HiddenWord[GuessIndex])
+        {
+            Count.Bulls++;
+            continue;
+        }
+
+        for (int32 HWIndex = 0; HWIndex < HiddenWord.Len(); HWIndex++)
+        {
+            if (Guess[GuessIndex] == HiddenWord[HWIndex])
+            {
+                Count.Cows++;
+                break;
+            }
+        }
+    }
+    return Count;
 }
